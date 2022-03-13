@@ -23,6 +23,7 @@ strict_encoding = "1.8.0-rc.1"
 lightning_encoding_derive = { version = "0.6.0-rc.1", path = "derive", optional = true }
 bitcoin = "0.28.0-rc.1"
 chrono = "0.4.19"
+descriptor-wallet = { version = "0.6.0-beta.1", default-features = false }
 
 [features]
 default = ["derive"]

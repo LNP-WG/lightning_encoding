@@ -75,7 +75,7 @@ impl Strategy for secp256k1::SecretKey {
     type Strategy = strategies::AsStrict;
 }
 
-impl Strategy for secp256k1::Signature {
+impl Strategy for secp256k1::ecdsa::Signature {
     type Strategy = strategies::AsStrict;
 }
 

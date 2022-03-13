@@ -19,8 +19,6 @@
 #[macro_use]
 extern crate lightning_encoding_derive;
 
-use internet2::tlv;
-
 #[derive(LightningEncode, LightningDecode)]
 struct Me(u8);
 
@@ -34,9 +32,6 @@ struct One {
 
     #[lightning_encoding(tlv = 2)]
     tlv_int2: Option<u16>,
-
-    #[lightning_encoding(unknown_tlvs)]
-    rest_of_tlvs: tlv::Stream,
 }
 
 #[derive(LightningEncode, LightningDecode)]

@@ -15,7 +15,6 @@ use std::io::{Read, Write};
 
 use bitcoin::consensus::deserialize;
 use bitcoin::{hashes, secp256k1, Script};
-use wallet::scripts::PubkeyScript;
 
 use super::{strategies, Strategy};
 use crate::{Error, LightningDecode, LightningEncode};
@@ -88,14 +87,6 @@ impl Strategy for wallet::hlc::HashPreimage {
     type Strategy = strategies::AsStrict;
 }
 
-impl Strategy for lnpbp::chain::AssetId {
-    type Strategy = strategies::AsStrict;
-}
-
-impl Strategy for lnpbp::bech32::Blob {
-    type Strategy = strategies::AsWrapped;
-}
-
 impl LightningEncode for Script {
     #[inline]
     fn lightning_encode<E: Write>(&self, e: E) -> Result<usize, Error> {
@@ -108,8 +99,4 @@ impl LightningDecode for Script {
         deserialize(&Vec::<u8>::lightning_decode(d)?)
             .map_err(|err| Error::DataIntegrityError(err.to_string()))
     }
-}
-
-impl Strategy for PubkeyScript {
-    type Strategy = strategies::AsWrapped;
 }

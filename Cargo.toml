@@ -1,42 +1,34 @@
 [package]
-name = "lnp-core"
-version = "0.6.0-beta.1"
-license = "MIT"
+name = "lightning_encoding"
+version = "0.6.0-rc.1"
+license = "Apache-2.0"
 authors = ["Dr Maxim Orlovsky <orlovsky@pandoracore.com>"]
-description = "LNP Core Library: rust implementation of modular lightning channels architecture"
+description = "Network encoding for lightning network peer protocol data types"
 repository = "https://github.com/LNP-BP/lnp-core"
 homepage = "https://lnp-bp.org"
-keywords = ["bitcoin", "lightning", "rgb", "smart-contracts", "lnp-bp"]
-categories = ["cryptography::cryptocurrencies"]
+keywords = ["bitcoin", "lightning", "lnp-bp", "encoding"]
+categories = ["cryptography::cryptocurrencies", "network-programming", "parse"]
 readme = "README.md"
-exclude = [".github", "contrib", "lightning_encoding", "lnp2p"]
 edition = "2021"
 rust-version = "1.56.1"
 
 [lib]
-name = "lnp"
+name = "lightning_encoding"
 path = "src/lib.rs"
 crate-type = ["rlib", "staticlib"]
 
 [dependencies]
-amplify = "3.10.0"
-strict_encoding = "1.7.8"
-lightning_encoding = ">=0.5.10"
-descriptor-wallet = { version = "0.5.1", features = ["keygen"] }
-lnp2p = { version = "0.6.0-beta.1", path = "lnp2p", features = ["strict_encoding"] }
-lnpbp = "0.5.0"
-bitcoin = { version = "0.27.1", features = ["rand"] }
-secp256k1 = { version = "0.20.3", features = ["global-context-less-secure"] }
-internet2 = { version = ">=0.5.4", default-features = false, features = ["keygen"] }
-serde_crate = { package = "serde", version = "1", features = ["derive"], optional = true }
-serde_with = { version = "1.8", features = ["hex"], optional = true }
+amplify = "3.12.0"
+strict_encoding = "1.8.0-rc.1"
+lightning_encoding_derive = { version = "0.6.0-rc.1", path = "derive", optional = true }
+bitcoin = "0.28.0-rc.1"
+chrono = "0.4.19"
 
 [features]
-default = []
-all = ["serde"]
-serde = ["serde_crate", "serde_with", "amplify/serde", "bitcoin/use-serde", "lnp2p/serde", "descriptor-wallet/serde"]
+default = ["derive"]
+all = ["derive"]
+derive = ["lightning_encoding_derive"]
 
 [workspace]
-members = [".", "lnp2p", "lightning_encoding", "lightning_encoding/derive"]
-default-members = [".", "lnp2p", "lightning_encoding", "lightning_encoding/derive"]
-exclude = ["dep_test"]
+members = [".", "derive"]
+default-members = [".", "derive"]

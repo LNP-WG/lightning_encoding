@@ -79,11 +79,11 @@ impl Strategy for secp256k1::ecdsa::Signature {
     type Strategy = strategies::AsStrict;
 }
 
-impl Strategy for wallet::hlc::HashLock {
+impl Strategy for wallet::hlc::hlc::HashLock {
     type Strategy = strategies::AsStrict;
 }
 
-impl Strategy for wallet::hlc::HashPreimage {
+impl Strategy for wallet::hlc::hlc::HashPreimage {
     type Strategy = strategies::AsStrict;
 }
 

@@ -1,6 +1,6 @@
 [package]
 name = "lightning_encoding_derive"
-version = "0.6.0"
+version = "0.7.0"
 license = "Apache-2.0"
 authors = ["Dr. Maxim Orlovsky <orlovsky@pandoracore.com>"]
 description = "Derive macros for lightning network peer protocol encodings"
@@ -22,5 +22,5 @@ amplify_syn = "1.1.6"
 encoding_derive_helpers = "1.7.6"
 
 [dev-dependencies]
-lightning_encoding = { version = "0.6.0-rc.1", path = ".." }
+lightning_encoding = { version = "0.7.0", path = ".." }
 amplify_derive = "2.11.2"

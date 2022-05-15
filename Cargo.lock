@@ -123,7 +123,7 @@ checksum = "1bf2e165bb3457c8e098ea76f3e3bc9db55f87aa90d52d0e6be741470916aaa4"
 
 [[package]]
 name = "lightning_encoding"
-version = "0.7.0"
+version = "0.7.1"
 dependencies = [
  "amplify",
  "bitcoin",

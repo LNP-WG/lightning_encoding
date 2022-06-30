@@ -1,6 +1,6 @@
 [package]
 name = "lightning_encoding_derive"
-version = "0.7.0"
+version = "0.8.0"
 license = "Apache-2.0"
 authors = ["Dr. Maxim Orlovsky <orlovsky@pandoracore.com>"]
 description = "Derive macros for lightning network peer protocol encodings"
@@ -9,7 +9,8 @@ homepage = "https://github.com/internet2-org"
 keywords = ["lnp-bp", "lightning", "networking", "internet2", "proc-macro"]
 categories = ["encoding", "parsing", "network-programming"]
 readme = "../README.md"
-edition = "2018"
+edition = "2021"
+rust-version = "1.56.1"
 
 [lib]
 proc-macro = true
@@ -19,8 +20,9 @@ quote = "1"
 syn = "1"
 proc-macro2 = "1"
 amplify_syn = "1.1.6"
-encoding_derive_helpers = "1.7.6"
+encoding_derive_helpers = "0.8.0"
 
 [dev-dependencies]
-lightning_encoding = { version = "0.7.0", path = ".." }
+lightning_encoding = { version = "0.8.0", path = ".." }
 amplify_derive = "2.11.2"
+# internet2 = "0.8.0"

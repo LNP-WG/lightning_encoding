@@ -129,7 +129,22 @@ dependencies = [
  "bitcoin",
  "bitcoin_scripts",
  "chrono",
- "lightning_encoding_derive",
+ "lightning_encoding_derive 0.8.0",
+ "lnpbp_chain",
+ "strict_encoding",
+]
+
+[[package]]
+name = "lightning_encoding"
+version = "0.8.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bbfcfa60726746c360fb68ad137ca83baa9670db38e97549454a6da86c8c8c05"
+dependencies = [
+ "amplify",
+ "bitcoin",
+ "bitcoin_scripts",
+ "chrono",
+ "lightning_encoding_derive 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "strict_encoding",
 ]
 
@@ -140,10 +155,37 @@ dependencies = [
  "amplify_derive",
  "amplify_syn",
  "encoding_derive_helpers",
- "lightning_encoding",
+ "lightning_encoding 0.8.0",
  "proc-macro2",
  "quote",
  "syn",
+]
+
+[[package]]
+name = "lightning_encoding_derive"
+version = "0.8.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d24e56debda6b7cd63229a2d8b697eb73a77cc9a00507e06885b74b7f9fecb3d"
+dependencies = [
+ "amplify_syn",
+ "encoding_derive_helpers",
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
+name = "lnpbp_chain"
+version = "0.8.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "045c8c8f4a9d20f616eccc3b1e0a9e4ebfc024b715cb9543668e9ba5160aa591"
+dependencies = [
+ "amplify",
+ "bitcoin",
+ "bitcoin_hashes",
+ "lightning_encoding 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "once_cell",
+ "strict_encoding",
 ]
 
 [[package]]
@@ -164,6 +206,12 @@ checksum = "578ede34cf02f8924ab9447f50c28075b4d3e5b269972345e7e0372b38c6cdcd"
 dependencies = [
  "autocfg",
 ]
+
+[[package]]
+name = "once_cell"
+version = "1.16.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "86f0b0d4bf799edbc74508c1e8bf170ff5f41238e5f8225603ca7caaae2b7860"
 
 [[package]]
 name = "proc-macro2"

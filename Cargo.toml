@@ -21,6 +21,7 @@ crate-type = ["rlib", "staticlib"]
 amplify = "3.12.1"
 strict_encoding = "0.8.0"
 lightning_encoding_derive = { version = "0.8.0", path = "derive", optional = true }
+lnpbp_chain = "0.8.0"
 bitcoin = "0.28.1"
 chrono = "0.4.19"
 bitcoin_scripts = { version = "0.8.2", default-features = false }

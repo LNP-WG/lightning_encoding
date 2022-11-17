@@ -25,4 +25,3 @@ encoding_derive_helpers = "0.8.0"
 [dev-dependencies]
 lightning_encoding = { version = "0.8.0", path = ".." }
 amplify_derive = "2.11.2"
-# internet2 = "0.8.0"

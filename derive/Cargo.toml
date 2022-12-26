@@ -6,7 +6,7 @@ authors = ["Dr. Maxim Orlovsky <orlovsky@pandoracore.com>"]
 description = "Derive macros for lightning network peer protocol encodings"
 repository = "https://github.com/LNP-WG/lightning_encoding"
 homepage = "https://lnp-bp.org"
-keywords = ["lnp-bp", "lightning", "networking", "internet2", "proc-macro"]
+keywords = ["lnp-bp", "lightning", "networking", "proc-macro"]
 categories = ["encoding", "parsing", "network-programming"]
 readme = "../README.md"
 edition = "2021"
@@ -25,3 +25,4 @@ encoding_derive_helpers = "0.8.1"
 [dev-dependencies]
 lightning_encoding = { version = "0.9.0-rc.1", path = ".." }
 amplify_derive = "2.11.3"
+internet2 = "0.8.4" # TODO: Bump this version

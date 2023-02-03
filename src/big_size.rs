@@ -124,7 +124,7 @@ impl LightningEncode for BigSize {
                 result
             }
             _ => {
-                let mut result = (self.0 as u64).to_be_bytes().to_vec();
+                let mut result = self.0.to_be_bytes().to_vec();
                 result.insert(0, 0xFF);
                 result
             }
@@ -144,7 +144,7 @@ impl LightningDecode for BigSize {
                 if value < 0x100000000 {
                     Err(Error::BigSizeNotCanonical)
                 } else {
-                    Ok(BigSize(value as u64))
+                    Ok(BigSize(value))
                 }
             }
             0xFEu8 => {

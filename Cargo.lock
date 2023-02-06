@@ -13,14 +13,15 @@ dependencies = [
 
 [[package]]
 name = "amplify"
-version = "3.13.0"
+version = "3.14.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "116019a174e912931d5b19ca7ab6a22596d12cdb1320358fad3368f0aba135a9"
+checksum = "af87bda25a5d87be1b9aedb1516eba82b4b4ad930a595916afc8bb39bf84a851"
 dependencies = [
  "amplify_derive",
  "amplify_num",
  "amplify_syn",
  "stringly_conversions",
+ "wasm-bindgen",
 ]
 
 [[package]]
@@ -131,15 +132,15 @@ dependencies = [
 
 [[package]]
 name = "bitcoin_scripts"
-version = "0.9.0-rc.1"
+version = "0.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0b6512b98b415f5a1147c521f2989bd3cbbc77378c9f3777382835859119729a"
+checksum = "5f8b08389e5391cf8311fd4de09a340ed98b4b7c2f87c956125c22341b5d14fb"
 dependencies = [
  "amplify",
  "bitcoin 0.29.2",
  "secp256k1 0.24.2",
  "stability",
- "strict_encoding 0.9.0-rc.1",
+ "strict_encoding 0.9.0",
 ]
 
 [[package]]
@@ -163,6 +164,12 @@ name = "block-padding"
 version = "0.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8d696c370c750c948ada61c69a0ee2cbbb9c50b1019ddb86d9317157a99c2cae"
+
+[[package]]
+name = "bumpalo"
+version = "3.12.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0d261e256854913907f67ed06efbc3338dfe6179796deefc1ff763fc1aee5535"
 
 [[package]]
 name = "byteorder"
@@ -614,15 +621,15 @@ dependencies = [
 
 [[package]]
 name = "lightning_encoding"
-version = "0.9.0-rc.1"
+version = "0.9.0"
 dependencies = [
  "amplify",
  "bitcoin 0.29.2",
- "bitcoin_scripts 0.9.0-rc.1",
+ "bitcoin_scripts 0.9.0",
  "chrono",
- "lightning_encoding_derive 0.9.0-rc.1",
+ "lightning_encoding_derive 0.9.0",
  "lnpbp_chain",
- "strict_encoding 0.9.0-rc.1",
+ "strict_encoding 0.9.0",
 ]
 
 [[package]]
@@ -640,13 +647,13 @@ dependencies = [
 
 [[package]]
 name = "lightning_encoding_derive"
-version = "0.9.0-rc.1"
+version = "0.9.0"
 dependencies = [
  "amplify_derive",
  "amplify_syn",
  "encoding_derive_helpers",
  "internet2",
- "lightning_encoding 0.9.0-rc.1",
+ "lightning_encoding 0.9.0",
  "proc-macro2",
  "quote",
  "syn",
@@ -654,15 +661,15 @@ dependencies = [
 
 [[package]]
 name = "lnpbp_chain"
-version = "0.9.0-rc.1"
+version = "0.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b07e48078661864f577ce6165faf9165182a2028d9b6c9f7387245da3c90b6ab"
+checksum = "8cf3cde4b87fef3ba34e31e9a02fa9957d638fecccc3e12d83eaa096351fc0e0"
 dependencies = [
  "amplify",
  "bitcoin 0.29.2",
  "bitcoin_hashes 0.11.0",
  "once_cell",
- "strict_encoding 0.9.0-rc.1",
+ "strict_encoding 0.9.0",
 ]
 
 [[package]]
@@ -993,20 +1000,20 @@ dependencies = [
  "bitcoin 0.28.1",
  "bitcoin_hashes 0.10.0",
  "chrono",
- "strict_encoding_derive",
+ "strict_encoding_derive 0.8.0",
 ]
 
 [[package]]
 name = "strict_encoding"
-version = "0.9.0-rc.1"
+version = "0.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ae10097e736d1b74a9e6fc8f202d3446ec78750571ac0bc73b7ab37cb6e2c9ec"
+checksum = "0be7060b49729cd0b9b2391114632ef64c363a4055d91de049f5555b466193bb"
 dependencies = [
  "amplify",
  "bitcoin 0.29.2",
  "bitcoin_hashes 0.11.0",
  "chrono",
- "strict_encoding_derive",
+ "strict_encoding_derive 0.9.0",
 ]
 
 [[package]]
@@ -1014,6 +1021,18 @@ name = "strict_encoding_derive"
 version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "fd6a1540913b4033307dc0c09e5497ed33d940941f926e2d5e6e676521fbe353"
+dependencies = [
+ "amplify_syn",
+ "encoding_derive_helpers",
+ "proc-macro2",
+ "syn",
+]
+
+[[package]]
+name = "strict_encoding_derive"
+version = "0.9.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "34c9cabafb397fc1144463228ad4ba57c3c670a0117505fe59b15d8c74449716"
 dependencies = [
  "amplify_syn",
  "encoding_derive_helpers",
@@ -1187,6 +1206,60 @@ name = "wasi"
 version = "0.10.0+wasi-snapshot-preview1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1a143597ca7c7793eff794def352d41792a93c481eb1042423ff7ff72ba2c31f"
+
+[[package]]
+name = "wasm-bindgen"
+version = "0.2.84"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "31f8dcbc21f30d9b8f2ea926ecb58f6b91192c17e9d33594b3df58b2007ca53b"
+dependencies = [
+ "cfg-if",
+ "wasm-bindgen-macro",
+]
+
+[[package]]
+name = "wasm-bindgen-backend"
+version = "0.2.84"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "95ce90fd5bcc06af55a641a86428ee4229e44e07033963a2290a8e241607ccb9"
+dependencies = [
+ "bumpalo",
+ "log",
+ "once_cell",
+ "proc-macro2",
+ "quote",
+ "syn",
+ "wasm-bindgen-shared",
+]
+
+[[package]]
+name = "wasm-bindgen-macro"
+version = "0.2.84"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4c21f77c0bedc37fd5dc21f897894a5ca01e7bb159884559461862ae90c0b4c5"
+dependencies = [
+ "quote",
+ "wasm-bindgen-macro-support",
+]
+
+[[package]]
+name = "wasm-bindgen-macro-support"
+version = "0.2.84"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2aff81306fcac3c7515ad4e177f521b5c9a15f2b08f4e32d823066102f35a5f6"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+ "wasm-bindgen-backend",
+ "wasm-bindgen-shared",
+]
+
+[[package]]
+name = "wasm-bindgen-shared"
+version = "0.2.84"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0046fef7e28c3804e5e38bfa31ea2a0f73905319b677e57ebe37e49358989b5d"
 
 [[package]]
 name = "winapi"

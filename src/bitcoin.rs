@@ -13,7 +13,7 @@
 
 use std::io::{Read, Write};
 
-use bitcoin::consensus::deserialize;
+use bitcoin::consensus;
 use bitcoin::{hashes, secp256k1, Script};
 use bitcoin_scripts::{hlc, PubkeyScript};
 use lnpbp_chain::AssetId;
@@ -98,7 +98,7 @@ impl LightningEncode for Script {
 
 impl LightningDecode for Script {
     fn lightning_decode<D: Read>(d: D) -> Result<Self, Error> {
-        deserialize(&Vec::<u8>::lightning_decode(d)?)
+        consensus::deserialize(&Vec::<u8>::lightning_decode(d)?)
             .map_err(|err| Error::DataIntegrityError(err.to_string()))
     }
 }
@@ -109,4 +109,21 @@ impl Strategy for PubkeyScript {
 
 impl Strategy for AssetId {
     type Strategy = strategies::AsBitcoinHash;
+}
+
+#[cfg(test)]
+mod test {
+    use bitcoin_scripts::PubkeyScript;
+
+    use crate::LightningDecode;
+
+    #[test]
+    fn real_clightning_scriptpubkey() {
+        // Real scriptpubkey sent by clightning
+        let msg_recv = [
+            0, 22, 0, 20, 42, 238, 172, 27, 222, 161, 61, 181, 251, 208, 97,
+            79, 71, 255, 98, 8, 213, 205, 114, 94,
+        ];
+        PubkeyScript::lightning_deserialize(&msg_recv).unwrap();
+    }
 }

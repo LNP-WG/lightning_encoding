@@ -11,6 +11,7 @@
 // along with this software.
 // If not, see <https://opensource.org/licenses/MIT>.
 
+use std::io;
 use std::io::{Read, Write};
 
 use amplify::flags::FlagVec;
@@ -132,6 +133,23 @@ impl LightningDecode for FlagVec {
     fn lightning_decode<D: Read>(d: D) -> Result<Self, Error> {
         let flags = Vec::<u8>::lightning_decode(d)?;
         Ok(FlagVec::from_inner(flags))
+    }
+    fn lightning_deserialize(data: impl AsRef<[u8]>) -> Result<Self, Error> {
+        let bytes = data.as_ref();
+        if bytes.is_empty() {
+            Ok(FlagVec::default())
+        } else {
+            let mut decoder = io::Cursor::new(data.as_ref());
+            let rv = Self::lightning_decode(&mut decoder)?;
+            let consumed = decoder.position() as usize;
+
+            // Fail if data are not consumed entirely.
+            if consumed == data.as_ref().len() {
+                Ok(rv)
+            } else {
+                Err(Error::DataNotEntirelyConsumed)
+            }
+        }
     }
 }
 

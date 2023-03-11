@@ -14,7 +14,7 @@
 use std::io::{Read, Write};
 
 use bitcoin::consensus;
-use bitcoin::{hashes, secp256k1, Script};
+use bitcoin::{hashes, secp256k1, PubkeyHash, Script};
 use bitcoin_scripts::{hlc, PubkeyScript};
 use lnpbp_chain::AssetId;
 
@@ -105,6 +105,10 @@ impl LightningDecode for Script {
 
 impl Strategy for PubkeyScript {
     type Strategy = strategies::AsWrapped;
+}
+
+impl Strategy for PubkeyHash {
+    type Strategy = strategies::AsStrict;
 }
 
 impl Strategy for AssetId {

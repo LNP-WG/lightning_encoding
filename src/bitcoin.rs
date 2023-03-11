@@ -13,8 +13,7 @@
 
 use std::io::{Read, Write};
 
-use bitcoin::consensus;
-use bitcoin::{hashes, secp256k1, PubkeyHash, Script};
+use bitcoin::{consensus, hashes, secp256k1, PubkeyHash, Script};
 use bitcoin_scripts::{hlc, PubkeyScript};
 use lnpbp_chain::AssetId;
 

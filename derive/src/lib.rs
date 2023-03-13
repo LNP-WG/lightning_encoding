@@ -223,7 +223,7 @@ pub fn derive_lightning_encode(input: TokenStream) -> TokenStream {
 #[proc_macro_derive(LightningDecode, attributes(lightning_encoding))]
 pub fn derive_lightning_decode(input: TokenStream) -> TokenStream {
     let derive_input = parse_macro_input!(input as DeriveInput);
-    let tokens = decode_derive(
+    decode_derive(
         "lightning_encoding",
         ident!(lightning_encoding),
         ident!(LightningDecode),
@@ -232,7 +232,6 @@ pub fn derive_lightning_decode(input: TokenStream) -> TokenStream {
         derive_input,
         true,
     )
-    .unwrap_or_else(|e| e.to_compile_error());
-    eprintln!("{tokens}");
-    tokens.into()
+    .unwrap_or_else(|e| e.to_compile_error())
+    .into()
 }

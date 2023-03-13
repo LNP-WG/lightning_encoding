@@ -19,7 +19,7 @@ use amplify::num::u24;
 use amplify::{Slice32, Wrapper};
 
 use super::{strategies, Strategy};
-use crate::{Error, LightningDecode, LightningEncode};
+use crate::{BigSize, Error, LightningDecode, LightningEncode};
 
 impl LightningEncode for u8 {
     fn lightning_encode<E: Write>(&self, mut e: E) -> Result<usize, Error> {
@@ -101,24 +101,15 @@ impl LightningDecode for u64 {
 }
 
 impl LightningEncode for usize {
-    fn lightning_encode<E: Write>(&self, mut e: E) -> Result<usize, Error> {
-        let count = match *self {
-            count if count > u16::MAX as usize => {
-                return Err(Error::TooLargeData(count))
-            }
-            count => count as u16,
-        };
-        let bytes = count.to_be_bytes();
-        e.write_all(&bytes)?;
-        Ok(bytes.len())
+    fn lightning_encode<E: Write>(&self, e: E) -> Result<usize, Error> {
+        let size = BigSize::from(*self);
+        size.lightning_encode(e)
     }
 }
 
 impl LightningDecode for usize {
-    fn lightning_decode<D: Read>(mut d: D) -> Result<Self, Error> {
-        let mut buf = [0u8; 2];
-        d.read_exact(&mut buf)?;
-        Ok(u16::from_be_bytes(buf) as usize)
+    fn lightning_decode<D: Read>(d: D) -> Result<Self, Error> {
+        BigSize::lightning_decode(d).map(|size| size.into_inner() as usize)
     }
 }
 

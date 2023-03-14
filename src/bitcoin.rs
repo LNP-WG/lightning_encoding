@@ -90,15 +90,17 @@ impl Strategy for hlc::HashPreimage {
 
 impl LightningEncode for Script {
     #[inline]
-    fn lightning_encode<E: Write>(&self, e: E) -> Result<usize, Error> {
-        self.as_bytes().lightning_encode(e)
+    fn lightning_encode<E: Write>(&self, mut e: E) -> Result<usize, Error> {
+        e.write_all(self.as_bytes())?;
+        Ok(self.len())
     }
 }
 
 impl LightningDecode for Script {
-    fn lightning_decode<D: Read>(d: D) -> Result<Self, Error> {
-        let value = Vec::<u8>::lightning_decode(d)?;
-        let bytes = consensus::serialize(&value);
+    fn lightning_decode<D: Read>(mut d: D) -> Result<Self, Error> {
+        let mut buf = vec![];
+        d.read_to_end(&mut buf)?;
+        let bytes = consensus::serialize(&buf);
         consensus::deserialize(&bytes)
             .map_err(|err| Error::DataIntegrityError(err.to_string()))
     }
@@ -124,10 +126,11 @@ mod test {
     fn real_clightning_scriptpubkey() {
         // Real scriptpubkey sent by clightning
         let msg_recv = [
-            0, 22, 0, 20, 42, 238, 172, 27, 222, 161, 61, 181, 251, 208, 97,
+            0u8, 22, 0, 20, 42, 238, 172, 27, 222, 161, 61, 181, 251, 208, 97,
             79, 71, 255, 98, 8, 213, 205, 114, 94,
         ];
 
-        PubkeyScript::lightning_deserialize(&msg_recv).unwrap();
+        let script = PubkeyScript::lightning_deserialize(&msg_recv).unwrap();
+        assert_eq!(script.lightning_serialize().unwrap(), msg_recv);
     }
 }

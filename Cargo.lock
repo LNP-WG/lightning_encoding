@@ -701,7 +701,7 @@ dependencies = [
 
 [[package]]
 name = "lightning_encoding"
-version = "0.9.2"
+version = "0.9.3"
 dependencies = [
  "amplify",
  "bitcoin",
@@ -720,7 +720,7 @@ dependencies = [
  "amplify_syn",
  "encoding_derive_helpers 0.9.0",
  "internet2",
- "lightning_encoding 0.9.2",
+ "lightning_encoding 0.9.3",
  "proc-macro2",
  "quote",
  "syn",

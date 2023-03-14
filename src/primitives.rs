@@ -11,7 +11,6 @@
 // along with this software.
 // If not, see <https://opensource.org/licenses/MIT>.
 
-use std::io;
 use std::io::{Read, Write};
 
 use amplify::flags::FlagVec;
@@ -114,33 +113,24 @@ impl LightningDecode for usize {
 }
 
 impl LightningEncode for FlagVec {
-    fn lightning_encode<E: Write>(&self, e: E) -> Result<usize, Error> {
+    fn lightning_encode<E: Write>(&self, mut e: E) -> Result<usize, Error> {
         let flags = self.shrunk();
-        flags.as_inner().lightning_encode(e)
+        let mut vec = flags.as_inner().to_vec();
+        vec.reverse();
+        let len = vec.len() as u16;
+        len.lightning_encode(&mut e)?;
+        e.write_all(&vec)?;
+        Ok(vec.len() + 2)
     }
 }
 
 impl LightningDecode for FlagVec {
-    fn lightning_decode<D: Read>(d: D) -> Result<Self, Error> {
-        let flags = Vec::<u8>::lightning_decode(d)?;
-        Ok(FlagVec::from_inner(flags))
-    }
-    fn lightning_deserialize(data: impl AsRef<[u8]>) -> Result<Self, Error> {
-        let bytes = data.as_ref();
-        if bytes.is_empty() {
-            Ok(FlagVec::default())
-        } else {
-            let mut decoder = io::Cursor::new(data.as_ref());
-            let rv = Self::lightning_decode(&mut decoder)?;
-            let consumed = decoder.position() as usize;
-
-            // Fail if data are not consumed entirely.
-            if consumed == data.as_ref().len() {
-                Ok(rv)
-            } else {
-                Err(Error::DataNotEntirelyConsumed)
-            }
-        }
+    fn lightning_decode<D: Read>(mut d: D) -> Result<Self, Error> {
+        let len = u16::lightning_decode(&mut d)?;
+        let mut buf = vec![0u8; len as usize];
+        d.read_exact(&mut buf)?;
+        buf.reverse();
+        Ok(FlagVec::from_inner(buf))
     }
 }
 

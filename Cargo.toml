@@ -18,7 +18,7 @@ path = "src/lib.rs"
 crate-type = ["rlib", "staticlib"]
 
 [dependencies]
-amplify = "3.13.0"
+amplify = "3.14.2"
 strict_encoding = "0.9.0"
 lightning_encoding_derive = { version = "0.9.1", path = "derive", optional = true }
 lnpbp_chain = "0.9.0"
